@@ -1,0 +1,31 @@
+#+title: Spanning Sets and Linear Independence
+* Question 13
+In this question we have a problem that has 4 vectors, in order to solve this,
+we can use the library SymPy to solve the linear system of equations because it
+requires parametrization.
+
+#+BEGIN_SRC python :python ~/envs/physics/bin/python :session physics
+import sympy as sp
+
+# Define symbols
+c1, c2, c3, c4 = sp.symbols('c1 c2 c3 c4')
+
+# Define vectors as COLUMNS in a matrix
+M = sp.Matrix([
+    [0, 1, 1, 1], # Row 1: First components of all 4 vectors
+    [0, 0, 0, 1], # Row 2: Second components
+    [0, 0, 1, 1], # Row 3: Third components
+    [1, 1, 1, 1]  # Row 4: Fourth components
+])
+
+# Solve the homogeneous system M*c = 0
+solution = sp.solve(M * sp.Matrix([c1, c2, c3, c4]), (c1, c2, c3, c4))
+sp.latex(solution)
+#+END_SRC
+
+#+RESULTS:
+: \left\{ c_{1} : 0, \  c_{2} : 0, \  c_{3} : 0, \  c_{4} : 0\right\}
+
+\begin{align*}
+\left\{ c_{1} : 0, \  c_{2} : 0, \  c_{3} : 0, \  c_{4} : 0\right\}
+\end{align*}

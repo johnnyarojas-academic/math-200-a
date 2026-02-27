@@ -75,8 +75,8 @@
 ** DONE Wednesday - February 25
 *** DONE Download Note: M200.201 Notes for 4.4
 *** DONE LA-4.4 Spanning Sets and Linear Independence
-** TODO Friday - February 27
-*** TODO Download Note: M200.201 Slides for 4.5
+** DONE Friday - February 27
+*** DONE Download Note: M200.201 Slides for 4.5
 
 * TODO Week 8
 ** TODO Monday - March 2

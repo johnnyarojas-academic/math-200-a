@@ -24,7 +24,7 @@ sp.latex(solution)
 #+END_SRC
 
 #+RESULTS:
-: \left\{ c_{1} : 0, \  c_{2} : 0, \  c_{3} : 0, \  c_{4} : 0\right\}
+:  \left\{ c_{1} : 0, \  c_{2} : 0, \  c_{3} : 0, \  c_{4} : 0\right\}
 
 \begin{align*}
 \left\{ c_{1} : 0, \  c_{2} : 0, \  c_{3} : 0, \  c_{4} : 0\right\}

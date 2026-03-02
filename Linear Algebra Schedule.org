@@ -79,9 +79,9 @@
 *** DONE Download Note: M200.201 Slides for 4.5
 
 * TODO Week 8
-** TODO Monday - March 2
-*** TODO Download Note: M200.201 Slides for 4.7
-*** TODO LA-4.5 Basis and Dimension
+** DONE Monday - March 2
+*** DONE Download Note: M200.201 Slides for 4.7
+*** DONE LA-4.5 Basis and Dimension
 ** TODO Wednesday - March 4
 *** TODO LA-4.7 Coordinates and Change of Basis
 ** TODO Friday - March 6

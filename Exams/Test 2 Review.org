@@ -1,0 +1,68 @@
+#+title: Test 2 Review
+
+* Section 4.3  Subspaces of $R^3$
+** Checking if a vector space is a subspace
+A subspace can be verified by checking if the set has clousure under vector addition and scalar multiplication.
+
+*** Example 1
+
+\begin{align*}
+(a) \quad W = {(x,y) : y = ax}
+\end{align*}
+
+Sol.
+
+\begin{align*}
+(x_1, y_1) + (x_2, y_2) \\
+(x_1, ax_1) + (x_2, ax_2) \\
+(x_1, x_2, a(x_1 + x_2)
+\end{align*}
+
+---
+
+\begin{align*}
+c(x, y) \\
+c(x, ax) \\
+(cxn, cax) \\
+(cx, a(cx))
+\end{align*}
+
+*** Example 2
+
+\begin{align*}
+W = {(x, y) : y = ax^2}
+\end{align*}
+
+Sol.
+
+Fails clousure of scalar multiplication:
+
+\begin{align*}
+c(x, ax^2) \\
+(cx, c(ax^2) \neq (cx, a(x^2)))
+\end{align*}
+
+* Section 4.4 - Spanning Sets and Linear Independence
+** Determining if a set of vectors spans
+S spans $R^2$ means any vector in $R^n$ can be written as a linear combination of vectors in $S$.
+
+$S$ is $L.I$ means that if $\vec{0}$ can be written as a linear combination of vectors in $S$ in a unique way.
+*** Example
+Determine whether $S = {(4, 0, 1), (0, -3, 2), (5, 10, 0)}$
+
+(a) spans $R^3$, and
+
+(b) is linearly independent
+Does the system
+
+\begin{align*}
+\left[
+\begin{matrix}
+4 & 0 & 5 & 0 \\
+0 & -3 & 10 & 0 \\
+1 & 2 & 0 & 0
+\end{matrix}
+\right]
+\end{align*}
+
+only have the trivial solution?

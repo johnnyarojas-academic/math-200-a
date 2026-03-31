@@ -1,0 +1,253 @@
+#+title: Q A
+* 1
+For a real number $x$, you can define $e^x$ by the series
+
+\begin{align*}
+e^{x} = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + \dots
+\end{align*}
+
+In a similar way, for a square matrix $X$, you can define $e^{X}$ by the series
+
+\begin{align*}
+e^X = I + X + \frac{1}{2!}X^2 + \frac{1}{3!}X^3 + \frac{1}{4!}X^4 + \dots
+\end{align*}
+
+Evaluate $e^X$, where $X$ is the square matrix shown.
+
+\begin{align*}
+X =
+\left[
+\begin{matrix}
+1 & 0 \\
+1 & 0
+\end{matrix}
+\right]
+\end{align*}
+
+** Solution
+Since we define $e^{X}$ to be:
+\begin{align*}
+e^{X} =
+\left[
+\begin{matrix}
+1 & 0 \\
+0 & 1
+\end{matrix}
+\right]
++ X + \frac{1}{2!}X^2 + \frac{1}{3!}X^3 + \frac{1}{4!}X^4 + \dots
+\end{align*}
+
+We can analyze what happens to the powers of $X$ an get:
+
+\begin{align*}
+X^{n} =
+\left[
+\begin{matrix}
+1 & 0 \\
+1 & 0
+\end{matrix}
+\right], \quad n \neq 0
+\end{align*}
+
+Substituting:
+
+\begin{align*}
+e^{X} =
+\left[
+\begin{matrix}
+1 & 0 \\
+0 & 1
+\end{matrix}
+\right] + (1 + \frac{1}{2!} + \frac{1}{3!} + \frac{1}{4!} + \dots) \times
+\left[
+\begin{matrix}
+1 & 0 \\
+1 & 0
+\end{matrix}
+\right]
+\end{align*}
+
+Recall
+\begin{align*}
+e^{1} = 1 + (1) + \frac{(1)}{2!} + \frac{(1)}{3!} + \frac{(1)}{4!} + \dots \rightarrow
+e - 1 = 1 + \frac{1}{2!} + \frac{1}{3!} + \frac{1}{4!}
+\end{align*}
+
+Therefore:
+\begin{align*}
+e^{X} =
+\left[
+\begin{matrix}
+1 & 0 \\
+0 & 1
+\end{matrix}
+\right] + (e - 1)
+\left[
+\begin{matrix}
+1 & 0 \\
+1 & 0
+\end{matrix}
+\right]
+\end{align*}
+
+\begin{align*}
+e^{X} =
+\left[
+\begin{matrix}
+e & 0 \\
+e - 1 & 1 \\
+\end{matrix}
+\right]
+\end{align*}
+
+* 2
+Let
+
+\begin{align*}
+A =
+\left[
+\begin{matrix}
+-2 & 0 & 6 \\
+-1 & 1 & 2 \\
+-2 & 0 & 5
+\end{matrix}
+\right]
+\end{align*}
+
+Find a matrix $B$ such that $B^2 = A$ by first diagonalizing $A$; that is, first find an invertible matrix $P$ and a diagonal matrix $D$ such that $A = PDP^{-1}$.
+
+** Solution
+From the provided question:
+
+The invertible matrix P is the matrix whose columns are vectors that satisfy $A\vec{x}_i =  \lambda_i \vec{x}_i$ where $\lambda_i$ is the eigen-values (including repetitions) of the matrix A, and $\vec{x}_i$ are the said column vectors of the matrix P, $i$ represents the correspondance of eigenvectors to eigenvlues.
+
+The eigenvalues of $A$ are given by solving:
+
+\begin{align*}
+\text{det}(A - \lambda I) &=
+\left|
+\begin{matrix}
+-2 - \lambda & 0 & 6 \\
+-1 & 1 - \lambda & 2 \\
+-2 & 0 & 5 - \lambda
+\end{matrix}
+\right|
+= - \lambda^{3} + 4 \lambda^{2} - 5 \lambda + 2 = - \left(l - 2\right) \left(l - 1\right)^{2} \\
+\lambda_1, \lambda_2, \lambda_3 &= \left[ 1, \ 1, \  2\right]
+\end{align*}
+
+The eigenvectors for $\lambda_1, \lambda_2$ and $\lambda_3$ are therefore:
+
+\begin{align*}
+\vec{x}_1 =
+\left[\begin{matrix}
+2 \\
+0 \\
+1
+\end{matrix}\right]
+\qquad
+\vec{x}_2 =
+\left[\begin{matrix}
+0 \\
+1 \\
+0
+\end{matrix}\right]
+\qquad
+\vec{x}_3 =
+\left[\begin{matrix}
+3 \\
+1 \\
+2
+\end{matrix}\right]
+\end{align*}
+
+and.
+
+\begin{align*}
+P =
+\left[
+\begin{matrix}
+2 & 0 & 3 \\
+0 & 1 & 1 \\
+1 & 0 & 2
+\end{matrix}
+\right]
+\end{align*}
+
+D is the diagonal matrix composed of the eigenvalues in each position of the diagonal.
+
+\begin{align*}
+D =
+\left[
+\begin{matrix}
+\lambda_1 & 0 & 0 \\
+0 & \lambda_2 & 0 \\
+0 & 0 & \lambda_3
+\end{matrix}
+\right]
+\rightarrow
+\left[
+\begin{matrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 2
+\end{matrix}
+\right]
+\end{align*}
+
+Since $A$ is expressed as $PDP^{-1}$ and $(PDP^{-1})^n = (PDP^{-1})(PDP^{-1})(PDP^{-1}) \quad \dots \quad \text{(n) times} = PD^{n} P^{-1}$.
+
+\begin{align*}
+A^{\frac{1}{2}} &=
+\left[
+\begin{matrix}
+2 & 0 & 3 \\
+0 & 1 & 1 \\
+1 & 0 & 2
+\end{matrix}
+\right]
+\left[
+\begin{matrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 2
+\end{matrix}
+\right]^{\frac{1}{2}}
+\left[
+\begin{matrix}
+2 & 0 & 3 \\
+0 & 1 & 1 \\
+1 & 0 & 2
+\end{matrix}
+\right]^{-1} \\
+\end{align*}
+
+\begin{align*}
+A^{\frac{1}{2}} &=
+\left[
+\begin{matrix}
+2 & 0 & 3 \\
+0 & 1 & 1 \\
+1 & 0 & 2
+\end{matrix}
+\right]
+\left[
+\begin{matrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & \sqrt{2}
+\end{matrix}
+\right]
+\left[
+\begin{matrix}
+2 & 0 & -3 \\
+1 & 1 & -2 \\
+-1 & 0 & 2
+\end{matrix}
+\right]
+\end{align*}
+
+\begin{align*}
+A^{\frac{1}{2}} =
+\left[\begin{matrix}4 - 3 \sqrt{2} & 0 & -6 + 6 \sqrt{2}\\1 - \sqrt{2} & 1 & -2 + 2 \sqrt{2}\\2 - 2 \sqrt{2} & 0 & -3 + 4 \sqrt{2}\end{matrix}\right] \\
+\end{align*}

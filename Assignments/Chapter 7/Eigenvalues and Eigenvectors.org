@@ -1,0 +1,166 @@
+
+#+title: Eigenvalues And Eigenvectors
+
+* Question 9
+#+BEGIN_SRC python :python ~/envs/physics/bin/python :session physics
+import sympy as sp
+
+# Define symbols
+x = sp.symbols('x')
+
+# Solve the homogeneous system M*c = 0
+solution = sp.solve( (sp.Rational(1, 2) - x) * (sp.Rational(1, 8) - x) * (5 - x) + (-8 * (sp.Rational(1,8) -x )))
+sp.latex(solution)
+#+END_SRC
+
+#+RESULTS:
+: \left[ \frac{1}{8}, \  \frac{11}{4} - \frac{\sqrt{209}}{4}, \  \frac{11}{4} + \frac{\sqrt{209}}{4}\right]
+
+\begin{align*}
+\left[ \frac{1}{8}, \  \frac{11}{4} - \frac{\sqrt{209}}{4}, \  \frac{11}{4} + \frac{\sqrt{209}}{4}\right]
+\end{align*}
+
+#+BEGIN_SRC python :python ~/envs/physics/bin/python :session physics
+import sympy as sp
+
+# Define symbols
+x = sp.symbols('x')
+
+M = sp.Matrix([
+    [4 - x, 0, -4, 4],
+    [0, 4 - x, 0, 4],
+    [-3, 0, 3 - x, -3],
+    [0, 3, 0, 3 - x]
+])
+
+solution = sp.solve(sp.det(M), x)
+sp.latex(solution)
+#+END_SRC
+
+#+RESULTS:
+: \left[ 0, \  7\right]
+
+Simplified Value
+\begin{align*}
+x^{2} \left(x - 7\right)^{2}
+\end{align*}
+
+Solutions:
+\begin{align*}
+\left[ 0, \  7\right]
+\end{align*}
+
+#+BEGIN_SRC python :python ~/envs/physics/bin/python :session physics
+import sympy as sp
+
+# Define symbols
+x = sp.symbols('x')
+
+M = sp.Matrix([
+    [2 - x, 0, 1],
+    [0, 3 - x, 3],
+    [0, 0, 5 - x]
+])
+
+solution = sp.simplify(sp.det(M))
+sp.latex(solution)
+#+END_SRC
+
+#+RESULTS:
+: - x^{3} + 10 x^{2} - 31 x + 30
+
+Simplified Result
+\begin{align*}
+x^{2} \left(x - 7\right)^{2}
+\end{align*}
+
+#+BEGIN_SRC python :python ~/envs/physics/bin/python :session physics
+import sympy as sp
+
+# Define symbols
+x = sp.symbols('x')
+
+M = sp.Matrix([
+    [2 - x, 0, 1],
+    [0, 3 - x, 3],
+    [0, 0, 5 - x]
+])
+
+solution = sp.solve(sp.det(M), x)
+sp.latex(solution)
+#+END_SRC
+
+#+RESULTS:
+: \left[ 2, \  3, \  5\right]
+
+Result
+\begin{align*}
+\left[ 2, \  3, \  5\right]
+\end{align*}
+
+Consider the linear transformation $T: R^{n} \rightarrow R^{n}$ whose matrix $A$ relative to the standard basis is given.
+
+\begin{bmatrix}
+1 & 1 \\
+-2 & 4
+\end{bmatrix}
+
+#+BEGIN_SRC python :python ~/envs/physics/bin/python :session physics :results output raw
+x = sp.symbols('x')
+
+M = sp.Matrix([
+    [1 - x, 1],
+    [-2 , 4 - x]
+])
+
+solution = sp.solve(sp.det(M), x)
+print(sp.latex(solution))
+#+END_SRC
+
+#+RESULTS:
+\left[ 2, \  3\right]
+
+\begin{align*}
+\left[ 2, \  3\right]
+\end{align*}
+
+#+BEGIN_SRC python :python ~/envs/physics/bin/python :session physics :results output raw
+x1, x2, x3, x4 = sp.symbols('x1 x2 x3 x4')
+
+M1 = sp.Matrix([
+    [1 - 2, 1],
+    [-2 , 4 - 2]
+])
+
+N1 = sp.Matrix([x1, x2])
+
+M2 = sp.Matrix([
+    [1 - 3, 1],
+    [-2, 4 - 3]
+])
+
+N2 = sp.Matrix([x3, x4])
+
+solution1 = sp.solve(M1 * N1, [x1, x2])
+solution2 = sp.solve(M2 * N2, [x3, x4])
+print(sp.latex(solution1))
+print(sp.latex(solution2))
+#+END_SRC
+
+#+RESULTS:
+\left\{ x_{1} : x_{2}\right\}
+\left\{ x_{3} : \frac{x_{4}}{2}\right\}
+
+\begin{align*}
+\left\{ x_{1} : x_{2}\right\} \\
+\left\{ x_{3} : \frac{x_{4}}{2}\right\}
+\end{align*}
+
+(A - \lambda)x = 0
+
+#+BEGIN_SRC python :python ~/envs/physics/bin/python :session physics :results output raw
+
+A
+
+
+#+END_SRC

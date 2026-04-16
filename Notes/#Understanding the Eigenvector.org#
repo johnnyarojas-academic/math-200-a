@@ -1,0 +1,410 @@
+#+title: Understanding The Eigenvector
+
+* Matrix as transformations
+** Matrices represent directions in space
+Suppose you have a Matrix
+
+\begin{align*}
+A =
+\left[
+\begin{matrix}
+-2 & 0 & 6 \\
+-1 & 1 & 2 \\
+-2 & 0 & 5
+\end{matrix}
+\right]
+\end{align*}
+
+Each row of the matrix represents a vector that traverses the vector space with the use of scalars. e.g $(x, y, z)$.
+
+So:
+
+\begin{align*}
+A =
+\left[
+\begin{matrix}
+-2 & 0 & 6 \\
+-1 & 1 & 2 \\
+-2 & 0 & 5
+\end{matrix}
+\right]
+\left[
+\begin{matrix}
+x \\
+y \\
+z
+\end{matrix}
+\right]
+\end{align*}
+
+This matrix multiplication gives:
+
+\begin{align*}
+A =
+\left[
+\begin{matrix}
+-2x & 0y & 6z \\
+-1x & 1y & 2z \\
+-2x & 0y & 5z
+\end{matrix}
+\right]
+\end{align*}
+
+Where the vector space is represented by the matrix, for short hand notation we can think of the vector space as the collection of a single A, it will make the calculations much easier instead of thinking what happens to our scalars, as they would'nt change the result.
+
+\begin{align*}
+A =
+\left[
+\begin{matrix}
+-2 & 0 & 6 \\
+-1 & 1 & 2 \\
+-2 & 0 & 5
+\end{matrix}
+\right]
+\end{align*}
+
+The eigenvalues and eigenvectors of this matrix, will give us a vector by which if the matrix where transformed it would'nt be affected.
+
+** Computation of the Eigenvalues and eigenvectors
+The eigenvalues and are found by following two steps.
+
+Using the Characteristic Equation to find the eigenvalues.
+
+$\text{det}(A - \lambda I) = 0$
+
+and the vectors can be found by:
+
+$(A - \lambda_i I)\vec{x}_i = 0$
+
+where $\lambda_i$ and $\vec{x}_i$ are a pair of matching eigenvalue and eigenvector.
+
+*** Solving for the Eigenvalues
+#+BEGIN_SRC python :python ~/envs/physics/bin/python :session math :results output :async
+from sympy import *
+
+l = symbols('l')
+A = Matrix([
+    [-2 - l, 0, 6],
+    [-1, 1 - l, 2],
+    [-2, 0, 5 - l]
+])
+
+det_A = det(A)
+
+simplification = simplify(det_A)
+factor = factor(det_A)
+solution = solve(det_A)
+
+print(latex(simplification))
+print(latex(factor))
+print(latex(solution))
+#+END_SRC
+
+#+RESULTS:
+: - l^{3} + 4 l^{2} - 5 l + 2
+: - \left(l - 2\right) \left(l - 1\right)^{2}
+: \left[ 1, \  2\right]
+
+
+\begin{align*}
+\text{Simplification} &: - l^{3} + 4 l^{2} - 5 l + 2 \\
+\text{Factor} :&- \left(l - 2\right) \left(l - 1\right)^{2} \\
+\text{Solution} :& \left[ 1, \  2\right]
+\end{align*}
+
+*** Solving for the eigenvector
+
+Recall:
+$(A - \lambda_i I)\vec{x}_i = 0$
+
+#+BEGIN_SRC python :python ~/envs/physics/bin/python :session math :results output :async
+from sympy import *
+
+
+l1, l2 = 1, 2
+
+# Calculating the Eigenvector for the value of 1
+a1, a2, a3 = symbols('a1 a2 a3')
+
+A1 = Matrix([
+    [-2 - l1, 0, 6],
+    [-1, 1 - l1, 2],
+    [-2, 0, 5 - l1]
+])
+
+v1 = Matrix([a1, a2, a3])
+
+solution1 = solve(A1 * v1)
+print(latex(solution1))
+
+# Calculating the Eigenvector for the value of 2
+b1, b2, b3 = symbols('b1 b2 b3')
+A2 = Matrix([
+    [-2 - l2, 0, 6],
+    [-1, 1 - l2, 2],
+    [-2, 0, 5 - l2]
+])
+
+v2 = Matrix([b1, b2, b3])
+
+solution2 = solve(A2 * v2)
+print(latex(solution2))
+
+#+END_SRC
+
+#+RESULTS:
+: \left\{ a_{1} : 2 a_{3}\right\}
+: \left\{ b_{1} : \frac{3 b_{3}}{2}, \  b_{2} : \frac{b_{3}}{2}\right\}
+
+\begin{align*}
+v1 &= \left\{ a_{1} : 2 a_{3}\right\} \\
+v2 &= \left\{ b_{1} : \frac{3 b_{3}}{2}, \  b_{2} : \frac{b_{3}}{2}\right\}
+\end{align*}
+
+** Verifying the eigenvectors and eigenvalues
+
+We know that eigenvectors must satisfy their definition
+
+\begin{align*}
+\left[
+\begin{matrix}
+-2 & 0 & 6 \\
+-1 & 1 & 2 \\
+-2 & 0 & 5
+\end{matrix}
+\right]
+v_i = \lambda_i v_i
+\end{align*}
+
+#+BEGIN_SRC python python: ~/envs/physics/bin/python :session math :results output :async
+from sympy import *
+
+A = Matrix([
+    [-2, 0, 6],
+    [-1, 1, 2],
+    [-2, 0, 5]
+])
+
+# for lambda = 1
+v1 = Matrix([2, 0, 1])
+l1 = 1
+
+left1 = A * v1
+right1 = l1 * v1
+print(f"{latex(left1)} = {latex(right1)}")
+
+# for lambda = 1 (multiplicity)
+v2 = Matrix([0, 1, 0])
+l2 = 1
+
+left2 = A * v2
+right2 = l2 * v2
+print(f"{latex(left2)} = {latex(right2)}")
+
+# for lambda = 2
+v3 = Matrix([3, 1, 2])
+l3 = 2
+
+left3 = A * v3
+right3 = l3 * v3
+print(f"{latex(left3)} = {latex(right3)}")
+#+END_SRC
+
+#+RESULTS:
+
+
+
+
+** Computing $A^n$
+#+BEGIN_SRC python :python ~/envs/physics/bin/python :session math :results output :async
+from sympy import *
+
+A = Matrix([
+    [-2, 0, 6],
+    [-1, 1, 2],
+    [-2, 0, 5]
+])
+
+x = Matrix([
+    [2, 0, 3],
+    [0, 1, 1],
+    [1, 0, 2]
+])
+
+l = Matrix([
+    [1, 0, 0],
+    [0, 1, 0],
+    [0, 0, 2]
+])
+
+left1 = A * x
+print(latex(left1))
+
+right1 = x * l
+print(latex(right))
+
+left2 = A ** Rational(1,2)
+print(latex(left2))
+right2 = x * (l ** Rational(1,2) * (Inverse(x)))
+print(latex(right2))
+print(latex(x ** -1))
+#+END_SRC
+
+
+
+#+RESULTS:
+: ae7c479c-aaba-4df8-9596-04e9f72ac931
+
+\begin{align*}
+\text{Left}&: \left[\begin{matrix}2 & 0 & 6\\0 & 1 & 2\\1 & 0 & 4\end{matrix}\right] \\
+\text{Right}&: \left[\begin{matrix}2 & 0 & 3\\0 & 1 & 1\\2 & 0 & 4\end{matrix}\right]
+\end{align*}
+
+\begin{align*}
+\left[\begin{matrix}4 - 3 \sqrt{2} & 0 & -6 + 6 \sqrt{2}\\1 - \sqrt{2} & 1 & -2 + 2 \sqrt{2}\\2 - 2 \sqrt{2} & 0 & -3 + 4 \sqrt{2}\end{matrix}\right] \\
+\left[\begin{matrix}4 - 3 \sqrt{2} & 0 & -6 + 6 \sqrt{2}\\1 - \sqrt{2} & 1 & -2 + 2 \sqrt{2}\\2 - 2 \sqrt{2} & 0 & -3 + 4 \sqrt{2}\end{matrix}\right]
+\end{align*}
+
+\begin{align*}
+P^{-1} = : \left[\begin{matrix}2 & 0 & -3\\1 & 1 & -2\\-1 & 0 & 2\end{matrix}\right]
+\end{align*}
+
+* Final Answer
+From the provided question:
+
+The invertible matrix P is the matrix whose columns are vectors that satisfy $A\vec{x}_i =  \lambda_i \vec{x}_i$ where $\lambda_i$ is the eigen-values (including repetitions) of the matrix A, and $\vec{x}_i$ are the said column vectors of the matrix P, $i$ represents the correspondance of eigenvectors to eigenvlues.
+
+The eigenvalues of $A$ are given by solving:
+
+\begin{align*}
+\text{det}(A - \lambda I) &=
+\left|
+\begin{matrix}
+-2 - \lambda & 0 & 6 \\
+-1 & 1 - \lambda & 2 \\
+-2 & 0 & 5 - \lambda
+\end{matrix}
+\right|
+= - \lambda^{3} + 4 \lambda^{2} - 5 \lambda + 2 = - \left(l - 2\right) \left(l - 1\right)^{2} \\
+\lambda_1, \lambda_2, \lambda_3 &= \left[ 1, \ 1, \  2\right]
+\end{align*}
+
+The eigenvectors for $\lambda_1, \lambda_2$ and $\lambda_3$ are therefore:
+
+\begin{align*}
+\vec{x}_1 =
+\left[\begin{matrix}
+2 \\
+0 \\
+1
+\end{matrix}\right]
+\qquad
+\vec{x}_2 =
+\left[\begin{matrix}
+0 \\
+1 \\
+0
+\end{matrix}\right]
+\qquad
+\vec{x}_3 =
+\left[\begin{matrix}
+3 \\
+1 \\
+2
+\end{matrix}\right]
+\end{align*}
+
+and.
+
+\begin{align*}
+P =
+\left[
+\begin{matrix}
+2 & 0 & 3 \\
+0 & 1 & 1 \\
+1 & 0 & 2
+\end{matrix}
+\right]
+\end{align*}
+
+D is the diagonal matrix composed of the eigenvalues in each position of the diagonal.
+
+\begin{align*}
+D =
+\left[
+\begin{matrix}
+\lambda_1 & 0 & 0 \\
+0 & \lambda_2 & 0 \\
+0 & 0 & \lambda_3
+\end{matrix}
+\right]
+\rightarrow
+\left[
+\begin{matrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 2
+\end{matrix}
+\right]
+\end{align*}
+
+Since $A$ is expressed as $PDP^{-1}$ and $(PDP^{-1})^n = (PDP^{-1})(PDP^{-1})(PDP^{-1}) \quad \dots \quad \text{(n) times} = PD^{n} P^{-1}$.
+
+\begin{align*}
+A^{\frac{1}{2}} &=
+\left[
+\begin{matrix}
+2 & 0 & 3 \\
+0 & 1 & 1 \\
+1 & 0 & 2
+\end{matrix}
+\right]
+\left[
+\begin{matrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 2
+\end{matrix}
+\right]^{\frac{1}{2}}
+\left[
+\begin{matrix}
+2 & 0 & 3 \\
+0 & 1 & 1 \\
+1 & 0 & 2
+\end{matrix}
+\right]^{-1} \\
+\end{align*}
+
+\begin{align*}
+A^{\frac{1}{2}} &=
+\left[
+\begin{matrix}
+2 & 0 & 3 \\
+0 & 1 & 1 \\
+1 & 0 & 2
+\end{matrix}
+\right]
+\left[
+\begin{matrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & \sqrt{2}
+\end{matrix}
+\right]
+\left[
+\begin{matrix}
+2 & 0 & -3 \\
+1 & 1 & -2 \\
+-1 & 0 & 2
+\end{matrix}
+\right]
+\end{align*}
+
+\begin{align*}
+A^{\frac{1}{2}} =
+\left[\begin{matrix}4 - 3 \sqrt{2} & 0 & -6 + 6 \sqrt{2}\\1 - \sqrt{2} & 1 & -2 + 2 \sqrt{2}\\2 - 2 \sqrt{2} & 0 & -3 + 4 \sqrt{2}\end{matrix}\right] \\
+\end{align*}
+
+\begin{align*}
+e^{\frac{1}{2}} 
+\end{align*}

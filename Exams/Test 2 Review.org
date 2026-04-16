@@ -66,3 +66,23 @@ Does the system
 \end{align*}
 
 only have the trivial solution?
+
+* Test Review Problems
+** Problem 4
+#+BEGIN_SRC python :python ~/envs/physics/bin/python :session math :results output :async
+from sympy import *
+
+x1, x2, x3 = symbols('x1 x2 x3')
+S = Matrix([
+    [2, 2, 2],
+    [0, 4, -12],
+    [7, 5, 13]
+])
+v = Matrix([-1, 3, 5])
+solution = det(S)
+# solution = Inverse(S) * v
+print(latex(solution))
+#+END_SRC
+
+#+RESULTS:
+: 0

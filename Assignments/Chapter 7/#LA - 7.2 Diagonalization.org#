@@ -23,6 +23,7 @@ print(latex(solution))
 : \left[\begin{matrix}-4 & 0 & 0\\0 & -5 & 0\\0 & 0 & -1\end{matrix}\right]
 
 
+
 \begin{align*}
 \left[\begin{matrix}-4 & 0 & 0\\0 & -5 & 0\\0 & 0 & -1\end{matrix}\right]
 \end{align*}

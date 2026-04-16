@@ -105,6 +105,7 @@ print(latex(solution))
 : - \left(l - 2\right) \left(l - 1\right)^{2}
 : \left[ 1, \  2\right]
 
+
 \begin{align*}
 \text{Simplification} &: - l^{3} + 4 l^{2} - 5 l + 2 \\
 \text{Factor} :&- \left(l - 2\right) \left(l - 1\right)^{2} \\
